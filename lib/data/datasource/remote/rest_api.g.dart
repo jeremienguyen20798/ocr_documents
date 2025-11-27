@@ -20,12 +20,12 @@ class _RestAPI implements RestAPI {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<BaseResponse> login(LoginRequest loginRequest) async {
+  Future<BaseResponse> login(BaseRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(loginRequest.toJson());
+    _data.addAll(request.toJson());
     final _options = _setStreamType<BaseResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -48,14 +48,12 @@ class _RestAPI implements RestAPI {
   }
 
   @override
-  Future<BaseResponse> changePassword(
-    ChangePasswordRequest changePasswordRequest,
-  ) async {
+  Future<BaseResponse> changePassword(BaseRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(changePasswordRequest.toJson());
+    _data.addAll(request.toJson());
     final _options = _setStreamType<BaseResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -78,10 +76,9 @@ class _RestAPI implements RestAPI {
   }
 
   @override
-  Future<BaseResponse> loadParameters(int? templateID) async {
+  Future<BaseResponse> loadParameters(BaseRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<BaseResponse>(
@@ -133,12 +130,12 @@ class _RestAPI implements RestAPI {
   }
 
   @override
-  Future<BaseResponse> register(RegisterRequest registeRequest) async {
+  Future<BaseResponse> register(BaseRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(registeRequest.toJson());
+    _data.addAll(request.toJson());
     final _options = _setStreamType<BaseResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -161,7 +158,7 @@ class _RestAPI implements RestAPI {
   }
 
   @override
-  Future<BaseResponse> resetPassword(String email) async {
+  Future<BaseResponse> resetPassword(BaseRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

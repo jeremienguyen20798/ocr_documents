@@ -1,8 +1,9 @@
+import 'package:ocr_documents/data/datasource/remote/rest_api.dart';
+import 'package:ocr_documents/data/models/base_request.dart';
 import 'package:ocr_documents/data/models/base_response.dart';
 import 'package:ocr_documents/data/models/change_password_request.dart';
 import 'package:ocr_documents/data/models/login_request.dart';
 import 'package:ocr_documents/data/models/register_request.dart';
-import 'package:ocr_documents/data/remote/rest_api.dart';
 import 'package:ocr_documents/domain/repository/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
@@ -12,21 +13,16 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   @override
   Future<BaseResponse> changePassword(
-    String newPassword,
-    String confirmPassword,
+    ChangePasswordRequest changePasswordRequest,
   ) {
-    final request = ChangePasswordRequest(
-      'oldPassword',
-      newPassword,
-      confirmPassword,
-    );
-    return restAPI.changePassword(request);
+    final baseRequest = BaseRequest(changePasswordRequest.toJson());
+    return restAPI.changePassword(baseRequest);
   }
 
   @override
-  Future<BaseResponse> login(String email, String password) {
-    final request = LoginRequest(email, password, 'db');
-    return restAPI.login(request);
+  Future<BaseResponse> login(LoginRequest loginRequest) {
+    final baseRequest = BaseRequest(loginRequest.toJson());
+    return restAPI.login(baseRequest);
   }
 
   @override
@@ -35,18 +31,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<BaseResponse> register(
-    String email,
-    String password,
-    String login,
-    String name,
-  ) {
-    final request = RegisterRequest(name, email, login, password);
-    return restAPI.register(request);
+  Future<BaseResponse> register(RegisterRequest registerRequest) {
+    final baseRequest = BaseRequest(registerRequest.toJson());
+    return restAPI.register(baseRequest);
   }
 
   @override
   Future<BaseResponse> resetPassword(String email) {
-    return restAPI.resetPassword(email);
+    final baseRequest = BaseRequest({"email": email});
+    return restAPI.resetPassword(baseRequest);
   }
 }

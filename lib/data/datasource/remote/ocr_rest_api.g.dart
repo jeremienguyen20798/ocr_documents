@@ -45,7 +45,7 @@ class _OcrRestAPI implements OcrRestAPI {
     try {
       _value = _result.data?.map(
         (k, dynamic v) =>
-            MapEntry(k, dynamic),
+            MapEntry(k, (v as Map<String, dynamic>)),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, _result);
