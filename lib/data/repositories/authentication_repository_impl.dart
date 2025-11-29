@@ -1,8 +1,8 @@
 import 'package:ocr_documents/data/datasource/remote/rest_api.dart';
 import 'package:ocr_documents/data/models/base_request.dart';
-import 'package:ocr_documents/data/models/base_response.dart';
 import 'package:ocr_documents/data/models/change_password_request.dart';
 import 'package:ocr_documents/data/models/login_request.dart';
+import 'package:ocr_documents/data/models/login_response.dart';
 import 'package:ocr_documents/data/models/register_request.dart';
 import 'package:ocr_documents/domain/repository/authentication_repository.dart';
 
@@ -12,33 +12,38 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl(this.restAPI);
 
   @override
-  Future<BaseResponse> changePassword(
+  Future<LoginResponse> changePassword(
     ChangePasswordRequest changePasswordRequest,
-  ) {
+  ) async {
     final baseRequest = BaseRequest(changePasswordRequest.toJson());
-    return restAPI.changePassword(baseRequest);
+    final response = await restAPI.changePassword(baseRequest);
+    return LoginResponse(response);
   }
 
   @override
-  Future<BaseResponse> login(LoginRequest loginRequest) {
+  Future<LoginResponse> login(LoginRequest loginRequest) async {
     final baseRequest = BaseRequest(loginRequest.toJson());
-    return restAPI.login(baseRequest);
+    final response = await restAPI.login(baseRequest);
+    return LoginResponse(response);
   }
 
   @override
-  Future<BaseResponse> logout() {
-    return restAPI.logout();
+  Future<LoginResponse> logout() async {
+    final response = await restAPI.logout();
+    return LoginResponse(response);
   }
 
   @override
-  Future<BaseResponse> register(RegisterRequest registerRequest) {
+  Future<LoginResponse> register(RegisterRequest registerRequest) async {
     final baseRequest = BaseRequest(registerRequest.toJson());
-    return restAPI.register(baseRequest);
+    final response = await restAPI.register(baseRequest);
+    return LoginResponse(response);
   }
 
   @override
-  Future<BaseResponse> resetPassword(String email) {
+  Future<LoginResponse> resetPassword(String email) async {
     final baseRequest = BaseRequest({"email": email});
-    return restAPI.resetPassword(baseRequest);
+    final response = await restAPI.resetPassword(baseRequest);
+    return LoginResponse(response);
   }
 }
