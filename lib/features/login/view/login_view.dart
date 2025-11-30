@@ -21,6 +21,9 @@ class LoginView extends StatelessWidget {
         if (state is LoadConfigFromReferralCodeState) {
           logoUrl = state.url;
           appName = state.app;
+        } else if (state is DisplayUILoginState) {
+          logoUrl = state.logoUrl;
+          appName = state.appName;
         }
         return Scaffold(
           backgroundColor: Colors.white,

@@ -5,3 +5,5 @@ const String hostKey = 'host';
 const String protocolKey = 'protocol';
 const String dbKey = 'db';
 const String uidKey = 'uid';
+const String logoUrl = 'url';
+const String appName = "appName";

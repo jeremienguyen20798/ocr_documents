@@ -28,3 +28,13 @@ class ConfirmLoginRequestState extends LoginState {
   @override
   List<Object?> get props => [entities];
 }
+
+class DisplayUILoginState extends LoginState {
+  final String appName;
+  final String logoUrl;
+
+  DisplayUILoginState(this.appName, this.logoUrl);
+
+  @override
+  List<Object?> get props => [appName, logoUrl];
+}

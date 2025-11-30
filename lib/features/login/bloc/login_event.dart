@@ -14,3 +14,10 @@ class ConfirmLoginRequestEvent extends LoginEvent {
 
   ConfirmLoginRequestEvent(this.email, this.password);
 }
+
+class DisplayUILoginEvent extends LoginEvent {
+  final String logo;
+  final String name;
+
+  DisplayUILoginEvent(this.logo, this.name);
+}

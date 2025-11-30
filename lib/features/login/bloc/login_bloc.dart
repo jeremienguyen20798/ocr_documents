@@ -12,13 +12,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<RequestInputReferralCodeEvent>(_requestInputReferralCode);
     on<LoadConfigFromReferralCodeEvent>(_loadConfigFromReferralCode);
     on<ConfirmLoginRequestEvent>(_confirmLoginRequest);
+    on<DisplayUILoginEvent>(_displayLoginUI);
   }
 
   void _requestInputReferralCode(
     RequestInputReferralCodeEvent event,
     Emitter<LoginState> emitter,
   ) {
-    emitter(RequestInputReferralCodeState());
+    final protocol = DataHelper().getProtocol();
+    final host = DataHelper().getHost();
+    final db = DataHelper().getDatabase();
+    if (protocol != null || host != null || db != null) {
+      final logoUrl = DataHelper().getLogoUrl();
+      final appName = DataHelper().getAppName();
+      add(DisplayUILoginEvent(logoUrl!, appName!));
+    } else {
+      emitter(RequestInputReferralCodeState());
+    }
   }
 
   Future<void> _loadConfigFromReferralCode(
@@ -32,6 +42,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     DataHelper().setProtocol(referralCodeEntities.protocol);
     DataHelper().setHost(referralCodeEntities.host);
     DataHelper().setDatabase(referralCodeEntities.db);
+    DataHelper().setAppName(referralCodeEntities.app);
+    DataHelper().setLogoUrl(referralCodeEntities.url);
     emitter(
       LoadConfigFromReferralCodeState(
         referralCodeEntities.url,
@@ -52,5 +64,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       DataHelper().setUid(result.uid!);
       emitter(ConfirmLoginRequestState(result));
     }
+  }
+
+  void _displayLoginUI(DisplayUILoginEvent event, Emitter<LoginState> emitter) {
+    final logoApp = event.logo;
+    final nameApp = event.name;
+    emitter(DisplayUILoginState(nameApp, logoApp));
   }
 }

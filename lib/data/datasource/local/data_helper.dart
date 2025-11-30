@@ -22,12 +22,36 @@ class DataHelper {
     prefs.setInt(uidKey, id);
   }
 
+  void setLogoUrl(String url) {
+    prefs.setString(logoUrl, url);
+  }
+
+  void setAppName(String name) {
+    prefs.setString(appName, name);
+  }
+
   //Get
+  String? getHost() {
+    return prefs.getString(hostKey);
+  }
+
+  String? getProtocol() {
+    return prefs.getString(protocolKey);
+  }
+
   String? getDatabase() {
     return prefs.getString(dbKey);
   }
 
   int? getUid() {
     return prefs.getInt(uidKey);
+  }
+
+  String? getAppName() {
+    return prefs.getString(appName);
+  }
+
+  String? getLogoUrl() {
+    return prefs.getString(logoUrl);
   }
 }
