@@ -12,7 +12,7 @@ class AuthenticationUsecase {
     if (db != null) {
       final request = LoginRequest(email, password, db);
       final response = await authRepo.login(request);
-      final entities = LoginEntities.fromJson(response.result);
+      final entities = LoginEntities.fromJson(response.result['result']);
       return entities;
     }
     return null;

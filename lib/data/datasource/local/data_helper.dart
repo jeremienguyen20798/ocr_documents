@@ -18,8 +18,16 @@ class DataHelper {
     prefs.setString(dbKey, db);
   }
 
+  void setUid(int id) {
+    prefs.setInt(uidKey, id);
+  }
+
   //Get
   String? getDatabase() {
     return prefs.getString(dbKey);
+  }
+
+  int? getUid() {
+    return prefs.getInt(uidKey);
   }
 }

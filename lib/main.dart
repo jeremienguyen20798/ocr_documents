@@ -3,8 +3,8 @@ import 'package:ocr_documents/dependency_injection.dart';
 
 import 'app.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DependencyInjection.init();
+  await DependencyInjection.init();
   runApp(const MyApp());
 }

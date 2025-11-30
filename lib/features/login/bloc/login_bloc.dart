@@ -48,6 +48,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       event.email,
       event.password,
     );
-    emitter(ConfirmLoginRequestState(result!));
+    if (result != null) {
+      DataHelper().setUid(result.uid!);
+      emitter(ConfirmLoginRequestState(result));
+    }
   }
 }
